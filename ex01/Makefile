@@ -6,11 +6,11 @@
 #    By: mforstho <mforstho@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/01/31 11:22:02 by mforstho      #+#    #+#                  #
-#    Updated: 2023/07/25 13:23:16 by mforstho      ########   odam.nl          #
+#    Updated: 2023/07/27 13:47:37 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := mutantstack
+NAME := RPN
 CC := c++
 CFLAGS ?= -Wextra -Wall -Werror -std=c++98 -pedantic #-fsanitize=address -g
 
