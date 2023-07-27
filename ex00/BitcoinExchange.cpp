@@ -6,26 +6,11 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 16:00:56 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/07/27 13:40:28 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/07/27 13:48:31 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-
-BitcoinExchange::BitcoinExchange(void) {
-}
-
-BitcoinExchange::BitcoinExchange(BitcoinExchange const & src) {
-}
-
-BitcoinExchange::~BitcoinExchange(void) {
-}
-
-BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & src) {
-	if (this == &src)
-		return (*this);
-	return (*this);
-}
 
 bool	BitcoinExchange::is_valid_date(int y, int m, int d) {
 	if (y < MIN_YEAR || y > MAX_YEAR) {
