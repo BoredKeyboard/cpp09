@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 16:00:56 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:26:30 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/07/27 13:40:28 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,43 @@ std::map<std::string, float>	BitcoinExchange::save_data(std::string data) {
 	return (datamap);
 }
 
-void	BitcoinExchange::find_data(std::string file, std::map<std::string, float> datamap) {
+bool	BitcoinExchange::is_valid_input(std::string input) {
+	if (input.find(" | ") != 10) {
+		return (false);
+	}
+	for (int i = 0; i < 10; i++) {
+		if ((i == 4 || i == 7) && input[i] != '-') {
+			std::cout << input[i] << std::endl;
+			return (false);
+		}
+		else if (input[i] != '-' && isdigit(input[i]) == 0) {
+			return (false);
+		}
+	}
+	int	i = input.find(" | ") + 3;
+	while (input[i] != '\0') {
+		if (input[i] != '.' && input[i] != '-' && std::isdigit(input[i]) == 0) {
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+int	BitcoinExchange::find_data(std::string file, std::map<std::string, float> datamap) {
 	std::ifstream inputfile(file);
 	std::string	line;
 	getline(inputfile, line);
+	if (line != "date | value") {
+		std::cout << "Error: invalid first line" << std::endl;
+		return (EXIT_FAILURE);
+	}
 	while (getline(inputfile, line)) {
-		if (!is_valid_date(atoi((line.substr(0, 4)).c_str()), atoi((line.substr(5, 2)).c_str()), atoi((line.substr(8, 2)).c_str()))) {
+		if (!is_valid_input(line)) {
 			std::cout << "Error: bad input => " << line << std::endl;
+		}
+		else if (!is_valid_date(std::stoi(line.substr(0, 4)), stoi(line.substr(5, 2)), stoi(line.substr(8, 2)))) {
+			std::cout << "Error: invalid date => " << line << std::endl;
 		}
 		else if (line.find(" | ") == line.npos) {
 			std::cout << "Error: wrong format => " << line << std::endl;
@@ -82,12 +112,13 @@ void	BitcoinExchange::find_data(std::string file, std::map<std::string, float> d
 			}
 			else {
 				std::map<std::string,float>::iterator it;
-				it = --datamap.upper_bound(date);
-				// std::cout << "Date: " << date << "    Value: " << value << std::endl;
-				// std::cout << "Date: " << it->first << "    Value: " << it->second << std::endl;
+				it = datamap.upper_bound(date);
+				if (it != datamap.begin()) {
+					it--;
+				}
 				std::cout << date << " => " << value << " = " << (it->second * atof(value.c_str())) << std::endl;
 			}
 		}
-		// std::cout << std::endl;
 	}
+	return (EXIT_SUCCESS);
 }
