@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 13:51:11 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/07/28 17:48:24 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/07/29 11:45:21 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	RPN::do_rpn(std::string input) {
 	std::stack<int>	numbers;
 	int	left;
 	int	right;
+
 	for (int i = 0; input[i] != '\0'; i++) {
 		if (input[i] != ' ') {
 			if (input[i + 1] != ' ' && input[i + 1] != '\0') {
@@ -54,6 +55,10 @@ int	RPN::do_rpn(std::string input) {
 				// std::cout << numbers.top() << std::endl;
 			}
 			else {
+				if (numbers.size() < 2) {
+					std::cout << "Error: too many operators" << std::endl;
+					return (EXIT_FAILURE);
+				}
 				right = numbers.top();
 				// std::cout << right << std::endl;
 				numbers.pop();
@@ -89,6 +94,10 @@ int	RPN::do_rpn(std::string input) {
 				// std::cout << numbers.top() << std::endl << std::endl;
 			}
 		}
+	}
+	if (numbers.size() != 1) {
+		std::cout << "Error: too many numbers without operators" << std::endl;
+		return (EXIT_FAILURE);
 	}
 	std::cout << numbers.top() << std::endl;
 	return (EXIT_SUCCESS);
