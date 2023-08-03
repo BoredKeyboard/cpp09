@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/29 12:00:04 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/02 16:08:31 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/03 13:16:03 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ PmergeMe**	make_first_pairs(std::vector<int> unsorted, int argc) {
 	PmergeMe**	set = NULL;
 	for (int i = 0; i < argc; i+=2) {
 		if (unsorted.at(i) < unsorted.at(i + 1)) {
-			set[i] = new PmergeMe(unsorted.at(i), unsorted.at(i + 1), NULL);
+			set[i] = new PmergeMe(unsorted.at(i), unsorted.at(i + 1), NULL, NULL);
 		}
 		else {
-			set[i] = new PmergeMe(unsorted.at(i + 1), unsorted.at(i), NULL);
+			set[i] = new PmergeMe(unsorted.at(i + 1), unsorted.at(i), NULL, NULL);
 		}
 	}
 	return (set);
@@ -39,7 +39,12 @@ PmergeMe**	make_first_pairs(std::vector<int> unsorted, int argc) {
 void	make_pairs_sort(PmergeMe** set, int set_count) {
 	PmergeMe**	new_set = NULL;
 	for (int i = 0; i < set_count; i+=2) {
-		new_set[i]
+		if (set[i]->get_right() < set[i + 1]->get_right()) {
+			new_set[i] = new PmergeMe(set[i]->get_right(), set[i + 1]->get_right(), set[i], set[i + 1]);
+		}
+		else {
+			new_set[i] = new PmergeMe(set[i + 1]->get_right(), set[i]->get_right(), set[i + 1], set[i]);
+		}
 	}
 }
 
