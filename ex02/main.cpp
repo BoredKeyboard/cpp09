@@ -6,11 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:11:49 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/09 16:45:38 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/10 14:58:26 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include "Sort.hpp"
+#include "VectorSlice.hpp"
 
 std::vector<int>	fill_vector(int argc, char *argv[]) {
 	std::vector<int>	unsorted;
@@ -23,6 +25,16 @@ std::vector<int>	fill_vector(int argc, char *argv[]) {
 	return (unsorted);
 }
 
+/*
+
+checken of er meer dan 1 paar over is
+van i = pair gap iteraten tot tot het einde
+bij elk getal kijken of ie groter is dan zn gepairde die links staat
+in het geval het getal kleiner is dan zn gepairde getal moeten ze geswapt worden
+checken of er een parent is en dit dan ook in de parent aanpassen
+
+*/
+
 int	main(int argc, char *argv[]) {
 	if (argc < 2) {
 		std::cout << "Error: need input" << std::endl;
@@ -30,6 +42,6 @@ int	main(int argc, char *argv[]) {
 	}
 
 	std::vector<int> nums = fill_vector(argc, argv);
-
+	VectorSlice	slice(nums);
 	return (EXIT_SUCCESS);
 }
