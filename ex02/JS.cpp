@@ -6,26 +6,25 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 16:33:26 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/11 16:37:02 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/12 14:06:45 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "JS.hpp"
 
-JS::JS(void) {
-}
+JS::JS(void) : _latest_value(0), _latest_p2(1) {}
 
-JS::JS(JS const & src) {
-}
+// JS::JS(JS const & src) {
+// }
 
-JS::~JS(void) {
-}
+// JS::~JS(void) {
+// }
 
-JS & JS::operator=(JS const & src) {
-	if (this == &src)
-		return (*this);
-	return (*this);
-}
+// JS & JS::operator=(JS const & src) {
+// 	if (this == &src)
+// 		return (*this);
+// 	return (*this);
+// }
 
 /*
 	pub fn next(self: *Self) usize {

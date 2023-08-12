@@ -6,13 +6,14 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:11:49 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/10 14:58:26 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/12 14:09:19 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include "Sort.hpp"
 #include "VectorSlice.hpp"
+#include "JS.hpp"
 
 std::vector<int>	fill_vector(int argc, char *argv[]) {
 	std::vector<int>	unsorted;
@@ -43,5 +44,15 @@ int	main(int argc, char *argv[]) {
 
 	std::vector<int> nums = fill_vector(argc, argv);
 	VectorSlice	slice(nums);
+
+
+
+
+	// std::cout << std::endl << std::endl;
+	// JS bruh;
+	// for (int i = 0; i < 10; i++) {
+	// 	std::cout << bruh.next() << std::endl;
+	// }
+
 	return (EXIT_SUCCESS);
 }
