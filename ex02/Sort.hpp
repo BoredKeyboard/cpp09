@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:16:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/12 14:09:22 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/15 14:04:36 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 # include "PmergeMe.hpp"
 # include "VectorSlice.hpp"
+# include "JS.hpp"
+# include <algorithm>
 
 class Sort {
 	private:
@@ -38,6 +40,10 @@ class Sort {
 		void	swap(int index1, int index2);
 		void	sort_pairs(void);
 		void	sort_pair(int pair_index);
+		void	insertion(void);
+		void	move(size_t from_index, size_t to_index);
+		void	moved(size_t from_index, size_t to_index);
+		size_t	binary_search(size_t from_index, size_t range, size_t value);
 };
 
 #endif

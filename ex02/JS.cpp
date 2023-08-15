@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 16:33:26 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/12 14:06:45 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/15 12:02:28 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ JS::JS(void) : _latest_value(0), _latest_p2(1) {}
     }
 */
 
-unsigned int JS::next(void) {
+size_t JS::next(void) {
 	_latest_p2 *= 2;
 	_latest_value = _latest_p2 - _latest_value;
 	return (_latest_value);

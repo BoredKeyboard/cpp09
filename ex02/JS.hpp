@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 16:31:00 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/12 14:07:36 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/15 12:03:19 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #ifndef JS_HPP
 # define JS_HPP
 
+# include <ctime>
+
 struct JS {
-	unsigned int _latest_value;
-	unsigned int _latest_p2;
+	size_t _latest_value;
+	size_t _latest_p2;
 
 	JS(void);
-	unsigned int next(void);
+	size_t next(void);
 };
 
 // class JS {
