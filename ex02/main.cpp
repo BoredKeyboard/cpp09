@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:11:49 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:36:05 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/16 16:20:41 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,16 @@ std::vector<int>	fill_vector(int argc, char *argv[]) {
 	for (int i = 1; i < argc; i++) {
 		unsorted.push_back(atoi(argv[i]));
 	}
-	for (int i = 0; i + 1< argc; i++) {	// only to print
-		std::cout << unsorted.at(i) << std::endl;
-	}
 	return (unsorted);
 }
 
-/*
-
-checken of er meer dan 1 paar over is
-van i = pair gap iteraten tot tot het einde
-bij elk getal kijken of ie groter is dan zn gepairde die links staat
-in het geval het getal kleiner is dan zn gepairde getal moeten ze geswapt worden
-checken of er een parent is en dit dan ook in de parent aanpassen
-
-*/
+void	print_vector(std::string prefix, std::vector<int> nums) {
+	std::cout << prefix;
+	for (int i = 0; i < nums.size(); i++) {
+		std::cout << " " << nums.at(i);
+	}
+	std::cout << std::endl;
+}
 
 int	main(int argc, char *argv[]) {
 	if (argc < 2) {
@@ -44,13 +39,11 @@ int	main(int argc, char *argv[]) {
 	}
 
 	std::vector<int> nums = fill_vector(argc, argv);
+	print_vector("Before:", nums);
 	PmergeMe s(nums);
 	s.sort();
-
-	std::cout << std::endl;
-	for (int i = 0; i < nums.size(); i++) {
-		std::cout << nums.at(i) << std::endl;
-	}
+	print_vector("After:", nums);
+	std::cout << "";
 
 
 	// std::cout << std::endl << std::endl;

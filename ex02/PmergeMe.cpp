@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:16:31 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:35:18 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/16 15:42:09 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,14 +145,3 @@ size_t	PmergeMe::binary_search(size_t from_index, size_t range, size_t value) {
 	}
 	return (start);
 }
-
-/*
-
-0 1 2 3 4 5
-^
-
-5
-
-0 1 2 3 4 5
-
-*/
