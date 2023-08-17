@@ -6,18 +6,28 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:11:49 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/16 16:20:41 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/17 14:54:46 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <vector>
+#include <list>
 
 #include "PmergeMe.hpp"
-#include "VectorSlice.hpp"
+#include "Slice.hpp"
 #include "JacobSequence.hpp"
 
-std::vector<int>	fill_vector(int argc, char *argv[]) {
+std::vector<int>	create_vector(int argc, char *argv[]) {
 	std::vector<int>	unsorted;
+	for (int i = 1; i < argc; i++) {
+		unsorted.push_back(atoi(argv[i]));
+	}
+	return (unsorted);
+}
+
+std::list<int>		create_list(int argc, char *argv[]) {
+	std::list<int>	unsorted;
 	for (int i = 1; i < argc; i++) {
 		unsorted.push_back(atoi(argv[i]));
 	}
@@ -38,12 +48,34 @@ int	main(int argc, char *argv[]) {
 		return (EXIT_FAILURE);
 	}
 
-	std::vector<int> nums = fill_vector(argc, argv);
-	print_vector("Before:", nums);
-	PmergeMe s(nums);
+	std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
+
+	std::vector<int> nums = create_vector(argc, argv);
+	PmergeMe< std::vector<int> > s(nums);
 	s.sort();
-	print_vector("After:", nums);
-	std::cout << "";
+
+	std::chrono::time_point<std::chrono::high_resolution_clock> mid = std::chrono::high_resolution_clock::now();
+
+	std::list<int> list_nums = create_list(argc, argv);
+	PmergeMe< std::list<int> > s2(list_nums);
+	s2.sort();
+
+	std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
+
+	std::cout << "Before:";
+	for (size_t i = 1; i < argc; i++) {
+		std::cout << " " << argv[i];
+	}
+	std::cout << std::endl;
+	print_vector("After: ", nums);
+	std::chrono::duration<double> diff1 = mid - start;
+	std::chrono::duration<double> diff2 = end - mid;
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << diff1.count() * 1000 * 1000 << " μs" << std::endl;
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::list   : " << diff2.count() * 1000 * 1000 << " μs" << std::endl;
+
+	for (size_t i = 1; i < nums.size(); i++) {
+		assert(nums[i - 1] <= nums[i]);
+	}
 
 
 	// std::cout << std::endl << std::endl;

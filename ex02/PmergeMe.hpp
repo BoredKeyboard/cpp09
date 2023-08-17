@@ -6,24 +6,24 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:16:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:36:28 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/17 14:37:42 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef SORT_HPP
-# define SORT_HPP
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
 
-# include "PmergeMe.hpp"
-# include "VectorSlice.hpp"
+# include "Slice.hpp"
 # include "JacobSequence.hpp"
-# include <algorithm>
-# include <vector>
 
+# include <algorithm>
+
+template<typename T>
 class PmergeMe {
 	private:
-		VectorSlice	_nums;
-		PmergeMe*	_parent;
+		Slice<T>		_nums;
+		PmergeMe<T>*	_parent;
 		unsigned int	_pair_count;
 		bool	_has_uneven;
 		int		_pair_gap;
@@ -39,14 +39,15 @@ class PmergeMe {
 
 	public:
 		PmergeMe(void);
-		PmergeMe(std::vector<int> &nums);
-		PmergeMe(std::vector<int> &nums, PmergeMe* parent);
-		PmergeMe(VectorSlice nums, PmergeMe* parent);
-		PmergeMe(PmergeMe const & src);
+		PmergeMe(T &nums);
+		PmergeMe(T &nums, PmergeMe<T>* parent);
+		PmergeMe(Slice<T> nums, PmergeMe<T>* parent);
+		PmergeMe(PmergeMe<T> const & src);
 		virtual ~PmergeMe(void);
-		PmergeMe & operator=(PmergeMe const & src);
-
+		PmergeMe<T> & operator=(PmergeMe<T> const & src);
 		void	sort(void);
 };
+
+# include "PmergeMe.tpp"
 
 #endif

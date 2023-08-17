@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   PmergeMe.cpp                                       :+:    :+:            */
+/*   PmergeMe.tpp                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/08/09 15:16:31 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:42:09 by mforstho      ########   odam.nl         */
+/*   Created: 2023/08/17 12:15:02 by mforstho      #+#    #+#                 */
+/*   Updated: 2023/08/17 14:39:22 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(void) {
+template<typename T>
+PmergeMe<T>::PmergeMe(void) {
 }
 
-PmergeMe::PmergeMe(std::vector<int> &nums) {
-	_nums = VectorSlice(nums);
+template<typename T>
+PmergeMe<T>::PmergeMe(T &nums) {
+	_nums = Slice<T>(nums);
 	_parent = NULL;
 	_pair_count = nums.size() / 2;
 	_has_uneven = nums.size() % 2;
 	_pair_gap = _pair_count + _has_uneven;
 }
 
-PmergeMe::PmergeMe(VectorSlice nums, PmergeMe* parent) {
+template<typename T>
+PmergeMe<T>::PmergeMe(Slice<T> nums, PmergeMe* parent) {
 	_nums = nums;
 	_parent = parent;
 	_pair_count = nums.size() / 2;
@@ -31,26 +34,30 @@ PmergeMe::PmergeMe(VectorSlice nums, PmergeMe* parent) {
 	_pair_gap = _pair_count + _has_uneven;
 }
 
-PmergeMe::PmergeMe(PmergeMe const & src) {
+template<typename T>
+PmergeMe<T>::PmergeMe(PmergeMe const & src) { // TODO: do something
 }
 
-PmergeMe::~PmergeMe(void) {
+template<typename T>
+PmergeMe<T>::~PmergeMe(void) {
 }
 
-PmergeMe & PmergeMe::operator=(PmergeMe const & src) {
+template<typename T>
+PmergeMe<T> & PmergeMe<T>::operator=(PmergeMe<T> const & src) {
 	if (this == &src)
 		return (*this);
 	return (*this);
 }
 
-void	PmergeMe::recurse(void) {
-	// VectorSlice	slice(_nums.slice(_pair_gap));
-	PmergeMe	subset(_nums.slice(_pair_gap), _parent);
+template<typename T>
+void	PmergeMe<T>::recurse(void) {
+	PmergeMe<T>	subset(_nums.slice(_pair_gap), _parent);
 	subset._parent = this;
 	subset.sort();
 }
 
-void	PmergeMe::sort(void) {
+template<typename T>
+void	PmergeMe<T>::sort(void) {
 	if (_pair_count == 0) {
 		return ;
 	}
@@ -59,14 +66,16 @@ void	PmergeMe::sort(void) {
 	this->insertion();
 }
 
-void	PmergeMe::swapped(int index1, int index2) {
+template<typename T>
+void	PmergeMe<T>::swapped(int index1, int index2) {
 	if (_parent) {
 		_parent->swapped(index1 + _pair_gap, index2 + _pair_gap);
 	}
 	this->swap(index1, index2);
 }
 
-void	PmergeMe::swap(int index1, int index2) {
+template<typename T>
+void	PmergeMe<T>::swap(int index1, int index2) {
 	if (index1 == index2) {
 		return ;
 	}
@@ -78,13 +87,15 @@ void	PmergeMe::swap(int index1, int index2) {
 	}
 }
 
-void	PmergeMe::sort_pair(int pair_index) {
+template<typename T>
+void	PmergeMe<T>::sort_pair(int pair_index) {
 	if (_nums[pair_index] > _nums[pair_index + _pair_gap]) {
 		this->swap(pair_index, pair_index + _pair_gap);
 	}
 }
 
-void	PmergeMe::sort_pairs(void) {
+template<typename T>
+void	PmergeMe<T>::sort_pairs(void) {
 	size_t	pair_index = 0;
 	while (pair_index < _pair_count) {
 		this->sort_pair(pair_index);
@@ -92,7 +103,8 @@ void	PmergeMe::sort_pairs(void) {
 	}
 }
 
-void	PmergeMe::insertion(void) {
+template<typename T>
+void	PmergeMe<T>::insertion(void) {
 	size_t	to_sort = _pair_gap;
 	this->move(0, _pair_gap - 1);
 	to_sort--;
@@ -110,7 +122,8 @@ void	PmergeMe::insertion(void) {
 	}
 }
 
-void	PmergeMe::move(size_t from_index, size_t to_index) {
+template<typename T>
+void	PmergeMe<T>::move(size_t from_index, size_t to_index) {
 	if (from_index == to_index) {
 		return ;
 	}
@@ -120,14 +133,16 @@ void	PmergeMe::move(size_t from_index, size_t to_index) {
 	}
 }
 
-void	PmergeMe::moved(size_t from_index, size_t to_index) {
+template<typename T>
+void	PmergeMe<T>::moved(size_t from_index, size_t to_index) {
 	if (_parent) {
 		_parent->moved(from_index + _pair_gap, to_index + _pair_gap);
 	}
 	this->move(from_index, to_index);
 }
 
-size_t	PmergeMe::binary_search(size_t from_index, size_t range, size_t value) {
+template<typename T>
+size_t	PmergeMe<T>::binary_search(size_t from_index, size_t range, size_t value) {
 	size_t	start = from_index;
 	size_t	end = std::min(_nums.size(), from_index + range);
 	while (start != end) {

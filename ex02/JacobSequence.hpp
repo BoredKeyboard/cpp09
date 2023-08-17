@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/11 16:31:00 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:37:07 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/17 14:38:00 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef JS_HPP
 # define JS_HPP
 
-# include <ctime>
+# include <cstddef>
 
 struct JacobSequence {
 	size_t _latest_value;
