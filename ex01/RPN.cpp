@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 13:51:11 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/07/29 11:45:21 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/18 14:46:11 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	RPN::do_rpn(std::string input) {
 			}
 			if (is_operator(input[i]) == 0) {
 				numbers.push(input[i] - '0');
-				// std::cout << numbers.top() << std::endl;
 			}
 			else {
 				if (numbers.size() < 2) {
@@ -60,29 +59,23 @@ int	RPN::do_rpn(std::string input) {
 					return (EXIT_FAILURE);
 				}
 				right = numbers.top();
-				// std::cout << right << std::endl;
 				numbers.pop();
 				left = numbers.top();
-				// std::cout << left << std::endl;
 				numbers.pop();
 				switch (is_operator(input[i])) {
 					case (ADD) : {
-						// std::cout << "add" << std::endl;
 						numbers.push(left + right);
 						break ;
 					}
 					case (SUBTRACT) : {
-						// std::cout << "subtract" << std::endl;
 						numbers.push(left - right);
 						break ;
 					}
 					case (MULTIPLY) : {
-						// std::cout << "multiply" << std::endl;
 						numbers.push(left * right);
 						break ;
 					}
 					case (DIVIDE) : {
-						// std::cout << "divide" << std::endl;
 						if (right == 0) {
 							std::cout << "Error: division by zero (0) is not allowed" << std::endl;
 							return (EXIT_FAILURE);
@@ -91,7 +84,6 @@ int	RPN::do_rpn(std::string input) {
 						break ;
 					}
 				}
-				// std::cout << numbers.top() << std::endl << std::endl;
 			}
 		}
 	}
