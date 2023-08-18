@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 16:30:50 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/17 14:28:00 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/18 16:26:22 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@ template <typename T>
 Slice<T>::Slice(T &nums, size_t start) : _nums(&nums), _start(start), _end(nums.size()) {}
 template <typename T>
 Slice<T>::Slice(T &nums, size_t start, size_t end) : _nums(&nums), _start(start), _end(end) {}
+
+template<typename T>
+Slice<T>::Slice(Slice const & src) {
+	*this = src;
+}
+
+template<typename T>
+Slice<T>::~Slice(void) {
+}
+
+template<typename T>
+Slice<T> & Slice<T>::operator=(Slice<T> const & src) {
+	if (this == &src)
+		return (*this);
+	_nums = src._nums;
+	_start = src._start;
+	_end = src._end;
+	return (*this);
+}
 
 template <typename T>
 typename T::value_type &Slice<T>::operator[](size_t index) {

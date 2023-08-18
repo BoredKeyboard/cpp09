@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 12:15:02 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/17 14:39:22 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/18 16:27:05 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 template<typename T>
 PmergeMe<T>::PmergeMe(void) {
+	_nums = NULL;
+	_parent = NULL;
+	_pair_count = 0;
+	_has_uneven = 0;
+	_pair_gap = 0;
 }
 
 template<typename T>
@@ -35,7 +40,8 @@ PmergeMe<T>::PmergeMe(Slice<T> nums, PmergeMe* parent) {
 }
 
 template<typename T>
-PmergeMe<T>::PmergeMe(PmergeMe const & src) { // TODO: do something
+PmergeMe<T>::PmergeMe(PmergeMe const & src) {
+	*this = src;
 }
 
 template<typename T>
@@ -46,6 +52,11 @@ template<typename T>
 PmergeMe<T> & PmergeMe<T>::operator=(PmergeMe<T> const & src) {
 	if (this == &src)
 		return (*this);
+	_nums = src._nums;
+	_parent = src._parent;
+	_pair_count = src._pair_count;
+	_has_uneven = src._has_uneven;
+	_pair_gap = src._pair_gap;
 	return (*this);
 }
 

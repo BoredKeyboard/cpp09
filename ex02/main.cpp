@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 15:11:49 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/17 14:54:46 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/18 14:47:39 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,5 @@ int	main(int argc, char *argv[]) {
 	for (size_t i = 1; i < nums.size(); i++) {
 		assert(nums[i - 1] <= nums[i]);
 	}
-
-
-	// std::cout << std::endl << std::endl;
-	// JS bruh;
-	// for (int i = 0; i < 10; i++) {
-	// 	std::cout << bruh.next() << std::endl;
-	// }
-
 	return (EXIT_SUCCESS);
 }

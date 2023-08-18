@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 16:29:54 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/17 14:30:07 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/18 16:22:08 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ class Slice {	// ocf maken
 		Slice(T &nums);
 		Slice(T &nums, size_t start);
 		Slice(T &nums, size_t start, size_t end);
+		Slice(Slice const & src);
+		virtual ~Slice(void);
+		Slice<T> & operator=(Slice<T> const & src);
 
 		typename T::value_type &operator[](size_t index);
 		Slice<T> slice(size_t start, size_t end) const;
