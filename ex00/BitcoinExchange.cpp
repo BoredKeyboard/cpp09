@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 16:00:56 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/07/27 13:48:31 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/21 14:35:25 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ bool	BitcoinExchange::is_valid_input(std::string input) {
 int	BitcoinExchange::find_data(std::string file, std::map<std::string, float> datamap) {
 	std::ifstream inputfile(file);
 	std::string	line;
+	if (!inputfile.is_open()) {
+		std::cout << "Error: file does not exist" << std::endl;
+		return (EXIT_FAILURE);
+	}
 	getline(inputfile, line);
 	if (line != "date | value") {
 		std::cout << "Error: invalid first line" << std::endl;

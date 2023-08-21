@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 16:00:10 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/08/18 14:41:37 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/08/21 14:37:16 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ int	main(int argc, char *argv[]) {
 		return (EXIT_FAILURE);
 	}
 	std::map<std::string, float>	datamap;
+
+	std::ifstream	inputdata("data.csv");
+	if (!inputdata.is_open()) {
+		std::cout << "Error: \'data.csv\' not found" << std::endl;
+		return (EXIT_FAILURE);
+	}
 	datamap = BitcoinExchange::save_data("data.csv");
 	return (BitcoinExchange::find_data(argv[1], datamap));
 }
